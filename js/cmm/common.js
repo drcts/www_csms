@@ -371,7 +371,7 @@ function uploadWSSignFile(recFile, fleNm, callback){
 
 
 function SetNaviTitle(title) {
-  $("[data-role='header'] h1").text(title+"("+GetUserNm()+")");
+  $("[data-role='header'] h1").text(title);
 }
 function GetNaviTitle() {
   return $("[data-role='header'] h1").text();

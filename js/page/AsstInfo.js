@@ -384,9 +384,10 @@ var fn_qr_print = function () {
     var comNm = GetComNm()+" - "+GetGijumNm();
     //    alert('comNm - ' + comNm)
     cordova.plugins.web_call.coolMethod([pcNum, comNm],function(ret){
-        alert('success - ' + ret);
+        alert('coolMethod success - ' + ret);
     },function(err){
-        alert('error - ' + err);
+        //alert('coolMethod error - ' + err);
+        alert('프린터 설정화면에서 프린터를 연결하세요.');
     });
 }
 

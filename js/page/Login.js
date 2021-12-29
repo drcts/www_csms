@@ -65,37 +65,33 @@ $(document).on('pageshow', "#Login",function () {
     //navigator.splashscreen.hide();
     //log("pageshow login");
 
+    /*
+    0.업데이트여부처리
+    */
+    var url = ws_url + 'Select_Code_List';
+    var data = "{clsCd:'PRGM'}";
+    getAJAX(url, data, function(ret){
+        //alert('ret = ' + ret);
+        var versionCode = "10010";
+        try{
+            versionCode = JSON.parse(ret.d).Table[0].codeNm;
+        }catch(e){}
 
-        /*
-        0.업데이트여부처리
-        */
-        var url = ws_url + 'Select_Code_List';
-        var data = "{clsCd:'PRGM'}";
-        getAJAX(url, data, function(ret){
-            //alert('ret = ' + ret);
-            var versionCode = "10010";
-            try{
-                versionCode = JSON.parse(ret.d).Table[0].codeNm;
-                $("#spnTtl").html(versionCode.slice(3));
-            }catch(e){}
+        // 안드로이드 브리지호출
+        cordova.plugins.web_call.checkMethod([versionCode],function(ret){
 
-            // 안드로이드 브리지호출
-            cordova.plugins.web_call.checkMethod([versionCode],function(ret){
-
-                if(ret == 'Y'){
-                    //1.로그인페이지 로딩처리
-                    onInitLogin();
-                }
-                else{
-                    //2.버전체크실패... 앱종료?
-                    alert('버전체크실패.. 관리자에게 문의하세요');
-               }
-            },function(err){
-                alert('error - ' + err);
-            });
-
-
+            if(ret == 'Y'){
+                //1.로그인페이지 로딩처리
+                onInitLogin();
+            }
+            else{
+                //2.버전체크실패... 앱종료?
+                alert('버전체크실패.. 관리자에게 문의하세요');
+           }
+        },function(err){
+            alert('checkMethod error - ' + err);
         });
+    });
 
 });
 
@@ -170,6 +166,7 @@ function onLogIn() {
               //PageNonChange("#Main");
               $.mobile.changePage("#Main");
 
+
           }
           else {
               showErrorMessage(RtnCode);
@@ -208,3 +205,5 @@ function pageRefrash() {
     $('#txUserId').val("");
     $('#txUserPW').val("");
 }
+
+

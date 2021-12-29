@@ -190,6 +190,14 @@ function wsGijumStart(comCd, gijumCd, callback) {
 }
 
 
+//프린트 설정페이지
+var fn_printer = function () {
+    cordova.plugins.web_call.setMethod([''],function(ret){
+        alert('setMethod success - ' + ret);
+    },function(err){
+        alert('setMethod error - ' + err);
+    });
+}
 
 
 

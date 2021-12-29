@@ -370,7 +370,13 @@ canvas {
     margin-top: 6px;
 }
 
-
+.btnPrint{
+    border-radius: 5px;
+    border: 1px solid #73AD21;
+    padding: 3px;
+    color: white;
+    background-color: cadetblue;
+}
 
 
 
